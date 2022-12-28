@@ -11,45 +11,32 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (iconHeader) {
 
 		iconHeader.addEventListener('click', function (e) {
-			// анимация иконки
 			iconHeader.classList.toggle('_active');
 			menuHeader.classList.toggle('_active');
-			// замок на скрол при открытом мобильном меню
 			document.body.classList.toggle('_lock');
 		})
 	};
 
 	//Прокрутка при клике
-
 	let menuLinks = document.querySelectorAll('.menu__link[data-goto]');
 	if (menuLinks.length > 0) {
 		menuLinks.forEach(menuLink => {
-
 			menuLink.addEventListener("click", onMenuLinkClick);
 		});
-
 		function onMenuLinkClick(e) {
 			const menuLink = e.target;
-
-			//если атрибут дата не пустои и он вообще существует ли объект, на который ссылается дата атрибут
 			if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
 				const gotoBlock = document.querySelector(menuLink.dataset.goto);
-				//выщитываем положение объекта: координата верхней границы блока + кол-во прокрученных пикселей - высота хедера
 				const gotoBlockValue = gotoBlock.getBoundingClientRect().top + scrollY - document.querySelector('.header__menu-wrapper').offsetHeight;
-				// Делаем скролл контента по клику на номер разделов в мобаил меню
-				//если объект иконки меню содержит класс active(меню открыто), то 
 				if (iconHeader.classList.contains('_active')) {
 					iconHeader.classList.remove('_active');
 					menuHeader.classList.remove('_active');
-					// замок на скрол при открытом мобильном меню 110
 					document.body.classList.remove('_lock');
 				}
-
 				window.scrollTo({
 					top: gotoBlockValue,
 					behavior: "smooth"
 				});
-
 				e.preventDefault();
 			}
 		}
@@ -62,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			headerWrap.style.backgroundColor = "rgba(30, 37, 45, 0.9)";
 		}
 		if (header.getBoundingClientRect().top === 0) headerWrap.style.backgroundColor = "rgba(0,0,0, 0)";
-
 	});
 
 	//video
@@ -74,8 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			playVideo.play();
 			btnVideo.style.display = "none";
 			playVideo.setAttribute('controls', 'controls');
-		}
-		
+		}	
 	});
 
 	//form
@@ -85,10 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		form.addEventListener('submit', formSend);
 		
 	})
-	
 	async function formSend(e){
 		e.preventDefault();
-		
 		let error = formValidate(this);
 		console.log(error)
 	}
@@ -107,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					error++;
 				}
 			}
-			
 			else{
 				if(input.value === ''){
 					formAddError(input);
